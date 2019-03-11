@@ -24,7 +24,7 @@ import static com.cm.common.SystemMethod.executeNewFlow;
 @RequestMapping("/test")
 public class TestController {
 
-    //    @Autowired
+//     @Autowired
 //     @Resource
     @Resource(name="userService")
     private IUserService userService;
