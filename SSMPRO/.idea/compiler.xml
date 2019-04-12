@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="CrfPro" />
+        <module name="SSMPRO" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="CrfPro" target="1.8" />
+      <module name="SSMPRO" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
