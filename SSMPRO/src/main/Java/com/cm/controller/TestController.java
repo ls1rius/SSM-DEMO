@@ -47,7 +47,6 @@ public class TestController {
 
     @RequestMapping("/getUser")
     public User getUser(@RequestParam("id") int id) {
-
         return this.userService.selectUser(id);
     }
 
