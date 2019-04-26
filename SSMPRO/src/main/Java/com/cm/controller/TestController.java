@@ -5,10 +5,7 @@ import com.cm.service.IUserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -31,7 +28,7 @@ public class TestController {
 
 //    两种不同的参数请求方式
 
-    @RequestMapping("/showUser")
+    @RequestMapping(value = "/showUser",method = RequestMethod.GET)
     public void selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
@@ -45,7 +42,7 @@ public class TestController {
         response.getWriter().close();
     }
 
-    @RequestMapping("/getUser")
+    @RequestMapping(value = "/getUser",method = RequestMethod.GET)
     public User getUser(@RequestParam("id") int id) {
         return this.userService.selectUser(id);
     }
@@ -55,27 +52,39 @@ public class TestController {
 
 //    两种不同的参数请求方式
 
-    @RequestMapping("/test")
+    @RequestMapping(value = "/test",method = RequestMethod.GET)
     public Object test(@RequestParam("id") String id){
         HashMap<String,Object> mp = new HashMap<String, Object>();
-        mp.put("res","TestString");
+        mp.put("res","TestGET");
         return mp;
     }
 
-    @RequestMapping("/check")
+    @RequestMapping(value = "/check",method = RequestMethod.GET)
     public void check(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
 
         HashMap<String,Object>mp = new HashMap<String, Object>();
-        mp.put("res","CheckString");
+        mp.put("res","CheckTest");
 
         ObjectMapper mapper = new ObjectMapper();
         response.getWriter().write(mapper.writeValueAsString(mp));
         response.getWriter().close();
     }
 
+//    止
+
+
+
+//    POST传参
+    @RequestMapping(value = "/testPost",method = RequestMethod.POST)
+    public Object testPost(@RequestBody HashMap<String, Object> mp){
+        String content = (String) mp.get("content");
+        HashMap<String,Object> ans = new HashMap<String, Object>();
+        ans.put("res","TestPost");
+        return ans;
+    }
 //    止
 
 }
